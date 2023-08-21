@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button type="button" class="add_field_button">Add Field</button>
+	<button type="button" class="remove_field_button">Remove Field</button>
+	<div class="input_fields_wrap">
+		<input type="text" name="answer[]" class="field-long" />
+	</div>
+	<select id="type">
+	    <option value="item0">--Select an Item--</option>
+	    <option value="item1">Es</option>
+	    <option value="item2">Nasi</option>
+	    <option value="item3">item3</option>
+	</select>
+
+	<select id="size">
+	    <option value="">-- select one -- </option>
+	</select>
+ 	<script src="vendor/jquery/dist/jquery.js"></script>
+	<script>
+		var max_fields      = 10;
+		var wrapper         = $(".input_fields_wrap"); 
+		var add_button      = $(".add_field_button");
+		var remove_button   = $(".remove_field_button");
+
+		$(add_button).click(function(e){
+			e.preventDefault();
+			var total_fields = wrapper[0].childNodes.length;
+			if(total_fields < max_fields){
+				$(wrapper).append('<input type="text" name="answer[]" class="field-long" /><br>');
+			}
+		});
+		$(remove_button).click(function(e){
+			e.preventDefault();
+			var total_fields = wrapper[0].childNodes.length;
+			if(total_fields>1){
+				wrapper[0].childNodes[total_fields-1].remove();
+			}
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+	    $("#type").change(function () {
+	        var val = $(this).val();
+	        if (val == "item1") {
+	            $("#size").html("<option value='test'>Es Jeruk</option><option value='test2'>Es Teh</option>");
+	        } else if (val == "item2") {
+	            $("#size").html("<option value='test'>Nasi Padang</option><option value='test2'>Nasi Ayam</option>");
+	        } else if (val == "item3") {
+	            $("#size").html("<option value='test'>item3: test 1</option><option value='test2'>item3: test 2</option>");
+	        } else if (val == "item0") {
+	            $("#size").html("<option value=''>--select one--</option>");
+	        }
+	    });
+	});
+	</script>
+</body>
+</html>
